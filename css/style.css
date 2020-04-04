@@ -1,0 +1,83 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
+html,body{
+	margin: 0px;
+	padding: 0px;
+	background: #efefef;
+}
+.header{
+	background: #fff;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+	padding: 10px;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center
+}
+.right-header,.main{
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between
+}
+.inner-right{
+	margin: 0px 30px;
+}
+.main-body{
+	width: 80vw;
+}
+.left-nav,.main-body{
+	margin: 20px;
+	background: #fff;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+.left-nav{
+	width: 15vw;
+}
+.left-nav ul{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+.left-nav ul li{
+	margin: 10px 0px;
+}
+.left-nav ul li a{
+	text-decoration: none;
+}
+.add-button{
+	background: #40739e;
+	border: none;
+	padding: 5px 20px;
+	color: rgba(255,255,255,1);
+	font-weight: bold;
+}
+.add-button:hover{
+	color: rgba(255,255,255,.7);
+}
+.page-item.active .page-link{
+	background: #40739e;
+}
+.h1, h1{
+	font-size: 1.5rem;
+}
+div.clusters{
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+}
+div.cluster{
+	width: 200px;
+	height: 200px;
+	border-radius: 3px;
+	box-shadow: 0 8px 6px -6px rgba(0,0,0,0.6);
+	padding: 15px;
+	background: #40739e;
+	color: #fff;
+	font-weight: bold;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-between;
+	
+}
