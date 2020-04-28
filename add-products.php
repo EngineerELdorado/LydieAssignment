@@ -10,7 +10,7 @@ require_once("includes/header.php"); ?>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="Name">Product Name</label>
-							<input type="text" name="product-name" id="" class="form-control" placeholder="Product Name">
+							<input type="text" name="product-name" id="" value="Coca" class="form-control" placeholder="Product Name">
 						</div>
 					</div>
 					<div class="col-sm-6">

@@ -9,13 +9,13 @@ $userType = $user["type"];
  echo "<li><a href='suppliers.php'>Suppliers</a></li>";
  echo "<li><a href='managers.php'>Managers</a></li>";
  echo "<li><a href='inventory.php'>Inventory</a></li>";
- echo "<li><a href='purchases.php'>Purchases</a></li>";
+ echo "<li><a href='purchases.php'>Purchase orders</a></li>";
  echo "<li><a href='report.php'>Report</a></li>";
    }
    else{
 	echo "<li><a href='index.php'>Home</a></li>";
 	echo "<li><a href='inventory.php'>Inventory</a></li>";
-	echo "<li><a href='purchases.php'>Purchases</a></li>";
+	echo "<li><a href='purchases.php'>received orders</a></li>";
 	echo "<li><a href='report.php'>Report</a></li>";
    }
    

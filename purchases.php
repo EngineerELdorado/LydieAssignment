@@ -1,6 +1,10 @@
 <?php
 require_once("includes/header.php"); ?>
+<?php
 
+$user = $_SESSION["user"];
+$userType = $user["type"];
+?>
 	<div class="main">
 		<div class="left-nav">
 			<?php require_once "includes/left-nav.php"; ?>
@@ -8,7 +12,11 @@ require_once("includes/header.php"); ?>
 		<div class="main-body">
 			<table class="table table-hover js-basic-example dataTable table-custom">
 			<div class="button" style="text-align:right;padding:20px 0px;">
-				<a href="add-purchases.php" class="btn add-button">Add Purchase</a>
+			<?php if($userType=="Manager"){
+ echo '<a href="add-purchases.php" class="btn add-button">Add Purchase</a>';
+   }
+  
+   ?>	
 			</div>
 				<thead>
 					<tr>
@@ -19,7 +27,8 @@ require_once("includes/header.php"); ?>
 						<th>Manager</th>
 						<th class="<?php echo $hidden_class; ?>">Edit</th>
 						<th class="<?php echo $hidden_class; ?>">Delete</th>
-						<th class="<?php echo $user_class; ?>">Approve</th>
+						<th>Approve</th>
+						<th>Reject</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -42,23 +51,45 @@ require_once("includes/header.php"); ?>
 						<td><?php echo $supplier; ?></td>
 						<td><?php echo $quantity; ?></td>
 						<td><?php echo $manager; ?></td>
-						<td><a class="btn btn-xs btn-info" href="edit-purchases.php?edit-id=<?php echo $id; ?>">Edit Purchase</a></td>
-						<td><a class="btn btn-xs btn-danger deleteButton" data-target="product" href="" data-id="<?php echo $id; ?>">Delete Purchase</a></td>
-						<td class="<?php echo $user_class; ?>"><a class="btn btn-xs btn-info approvalRate" href="#" data-id="<?php echo $id; ?>">Approve Purchase</a></td>
-						<td class="<?php echo $user_class; ?>"><a class="btn btn-xs btn-danger rejectButton" data-target="product" href="" data-id="<?php echo $id; ?>">Reject Purchase</a></td>
+						<td><a class="btn btn-xs btn-info" href="edit-purchases.php?edit-id=<?php echo $id; ?>">Edit</a></td>
+						<td><a class="btn btn-xs btn-danger deleteButton" data-target="product" href="" data-id="<?php echo $id; ?>">Delete</a></td>
+						<td class="<?php echo $user_class; ?>">
+ <form action="form-handle/approve-purchase.php" method="post">
+ <input value =<?php echo $id?> class="d-none" name="id" stye="visibility:hidden" />
+ <button type="submit"  class="btn btn-xs btn-info">Approve</button>
+ </form>
+ </td>
+ <td id ="reject" class="<?php echo $user_class; ?>">
+ <form action="form-handle/reject-purchase.php" method="post">
+ <input value =<?php echo $id?> class="d-none" name="id" stye="visibility:hidden" />
+ <button type="submit"  class="btn btn-xs btn-danger rejectButton">Reject</button>
+ </form>
+ </td>
+  
+
 					</tr>
 					<?php
 						$counter++;
 					}
 					
 				?>
-				
-				
-					
 					
 				</tbody>
 			</table>
 		</div>
 	</div>
+	<script>
+	document.getElementById("approve").addEventListener('click', function (event) {
+		
+        $purchaseId =  event.target.dataset.id;
+        $sql = "UPDATE product_purchases set status ='Approved' where id = '{$purchaseId}'";mysqli_query($connection,$sql);
+		alert("Purchase approved")  
 	
+event.preventDefault();
+
+// Log the clicked element in the console
+
+
+}, false);
+	</script>
 <?php require_once("includes/footer.php") ?>

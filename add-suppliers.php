@@ -23,7 +23,7 @@ require_once("includes/header.php"); ?>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="Name">Phone</label>
-							<input type="text" name="supplier-phone" id="" class="form-control" placeholder="Supplier Phone Number">
+							<input type="text" maxlength="10" name="supplier-phone" id="" class="form-control" placeholder="Supplier Phone Number" >
 						</div>
 					</div>
 					<div class="col-sm-6">

@@ -14,25 +14,32 @@ require_once("includes/header.php"); ?>
 						<th>Name</th>
 						<th>Image</th>
 						<th>Supplier</th>
-						<th>Quantity Received</th>
+						<th>Quantity ordered</th>
 						<th>Manager</th>
+						<th>Status</th>
 					</tr>
 				</thead>
 				<tbody>
 				
 				
 				<?php
-					$sql = "SELECT product_purchases.id,product_purchases.product, product_purchases.supplier,product_purchases.quantity,product_purchases.manager,products.product_name,products.product_image,suppliers.supplier_name,managers.manager_name FROM product_purchases INNER JOIN suppliers ON product_purchases.supplier = suppliers.id INNER JOIN products ON product_purchases.product = products.id INNER JOIN managers on product_purchases.manager = managers.id WHERE product_purchases = 'Approved'";
+					$sql = "SELECT pp.id as purchaseId, pp.status as purchaseStatus, p.product_name as productName, s.supplier_name as supplierName, m.manager_name as managerName, pp.quantity as quantity, p.product_image as productImage
+					FROM product_purchases as pp 
+					INNER JOIN products as p on pp.product =  p.id
+					 INNER JOIN suppliers as s on pp.supplier =s.id
+					  INNER JOIN managers as m on pp.manager = m.id
+				";
 					$result = mysqli_query($connection,$sql);
 					$counter = 1;
 					
 					while($row = mysqli_fetch_assoc($result)){
-						$id = $row['id'];
-						$product = $row['product_name'];
-						$supplier = $row['supplier_name'];
-						$manager = $row['manager_name'];
+						$id = $row['purchaseId'];
+						$product = $row['productName'];
+						$supplier = $row['supplierName'];
+						$manager = $row['managerName'];
 						$quantity = $row['quantity'];
-						$image = $row['product_image'];
+						$image = $row['productImage'];
+						$status = $row['purchaseStatus'];
 						?>
 						<tr>
 						<td><b><?php echo $counter; ?></b></td>
@@ -42,8 +49,15 @@ require_once("includes/header.php"); ?>
 						<td><?php echo $supplier; ?></td>
 						<td><?php echo $quantity; ?></td>
 						<td><?php echo $manager; ?></td>
-						<td class="<?php echo $user_class; ?>"><a class="btn btn-xs btn-info approvalRate" href="#" data-id="<?php echo $id; ?>">Approve Purchase</a></td>
-						<td class="<?php echo $user_class; ?>"><a class="btn btn-xs btn-danger rejectButton" data-target="product" href="" data-id="<?php echo $id; ?>">Reject Purchase</a></td>
+						<td style="color: <?php 
+                                 if($status=="Approved"){
+									 echo "blue";
+								 }else if($status=="Rejected"){
+									 echo "red";
+								 }else if($status=="Pending"){
+									 echo "orange";
+								 }
+						?>" ><?php echo $status; ?></td>
 						
 					</tr>
 					<?php
